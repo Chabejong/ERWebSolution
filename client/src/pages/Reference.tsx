@@ -3,7 +3,7 @@ import { PortfolioCard } from '@/components/PortfolioCard';
 import { Footer } from '@/components/Footer';
 import { useQuery } from '@tanstack/react-query';
 import type { PortfolioProject } from '@shared/schema';
-import projectImage1 from '@assets/stock_images/laptop_screen_with_c_472be1aa.jpg';
+import projectImage1 from '@assets/stock_images/monochrome_developer_f793ec4a.jpg';
 import projectImage2 from '@assets/stock_images/abstract_web_interfa_ee660948.jpg';
 import projectImage3 from '@assets/generated_images/Cloud_hosting_technology_concept_568859e4.png';
 import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_1_1759860120116.jpg';
