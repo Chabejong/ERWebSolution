@@ -3,20 +3,27 @@ import { ContactForm } from '@/components/ContactForm';
 import { Footer } from '@/components/Footer';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import heroImage from '@assets/Lucid_Origin_Modern_web_design_concept_A_minimalistic_tablet_s_0_1759860120116.jpg';
 
 export default function Contact() {
   return (
     <div className="min-h-screen">
       <Navigation />
       
-      <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Get in Touch
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            We'd love to hear about your project and how we can help
-          </p>
+      <section className="relative h-[400px] md:h-[500px] bg-gradient-to-r from-primary/90 to-accent/90">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <div className="relative h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+              Get in Touch
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+              We'd love to hear about your project and how we can help
+            </p>
+          </div>
         </div>
       </section>
 

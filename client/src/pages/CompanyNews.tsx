@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { NewsArticle } from '@shared/schema';
 import newsImage1 from '@assets/generated_images/Business_team_collaboration_0246ba0f.png';
 import newsImage2 from '@assets/generated_images/Data_center_technology_infrastructure_5648b83b.png';
+import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_0_1759860120116.jpg';
 
 export default function CompanyNews() {
   const { data: newsArticles = [], isLoading } = useQuery<NewsArticle[]>({
@@ -28,14 +29,20 @@ export default function CompanyNews() {
     <div className="min-h-screen">
       <Navigation />
       
-      <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            News & Press
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Latest updates, announcements, and insights from E&R Webservice
-          </p>
+      <section className="relative h-[400px] md:h-[500px] bg-gradient-to-r from-primary/90 to-accent/90">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <div className="relative h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+              News & Press
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+              Latest updates, announcements, and insights from E&R Webservice
+            </p>
+          </div>
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import type { PortfolioProject } from '@shared/schema';
 import projectImage1 from '@assets/generated_images/Web_development_workspace_b730583d.png';
 import projectImage2 from '@assets/generated_images/Design_team_reviewing_work_cc87582c.png';
 import projectImage3 from '@assets/generated_images/Cloud_hosting_technology_concept_568859e4.png';
+import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_1_1759860120116.jpg';
 
 export default function Reference() {
   const { data: portfolioProjects = [], isLoading } = useQuery<PortfolioProject[]>({
@@ -71,14 +72,20 @@ export default function Reference() {
     <div className="min-h-screen">
       <Navigation />
       
-      <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Our Portfolio
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Showcasing successful projects across various industries
-          </p>
+      <section className="relative h-[400px] md:h-[500px] bg-gradient-to-r from-primary/90 to-accent/90">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <div className="relative h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+              Our Portfolio
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+              Showcasing successful projects across various industries
+            </p>
+          </div>
         </div>
       </section>
 
