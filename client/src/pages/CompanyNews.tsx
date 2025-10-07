@@ -4,7 +4,7 @@ import { Footer } from '@/components/Footer';
 import { useQuery } from '@tanstack/react-query';
 import type { NewsArticle } from '@shared/schema';
 import newsImage1 from '@assets/stock_images/multiracial_tech_tea_9888b301.jpg';
-import newsImage2 from '@assets/generated_images/Data_center_technology_infrastructure_5648b83b.png';
+import newsImage2 from '@assets/stock_images/diverse_business_tea_115ecd84.jpg';
 import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_0_1759860120116.jpg';
 
 export default function CompanyNews() {
