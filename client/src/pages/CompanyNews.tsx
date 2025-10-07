@@ -1,55 +1,28 @@
 import { Navigation } from '@/components/Navigation';
 import { NewsCard } from '@/components/NewsCard';
 import { Footer } from '@/components/Footer';
+import { useQuery } from '@tanstack/react-query';
+import type { NewsArticle } from '@shared/schema';
 import newsImage1 from '@assets/generated_images/Business_team_collaboration_0246ba0f.png';
 import newsImage2 from '@assets/generated_images/Data_center_technology_infrastructure_5648b83b.png';
-import newsImage3 from '@assets/generated_images/Web_development_workspace_b730583d.png';
 
 export default function CompanyNews() {
-  const newsArticles = [
-    {
-      title: 'E&R Webservice Launches Next-Generation Cloud Infrastructure',
-      excerpt: 'We are excited to announce the launch of our cutting-edge cloud hosting platform, featuring enhanced security, improved performance, and advanced scalability options for our clients.',
-      date: 'October 7, 2025',
-      author: 'Marketing Team',
-      image: newsImage2
-    },
-    {
-      title: 'Strategic Partnership with Leading Tech Companies Announced',
-      excerpt: 'E&R Webservice has formed strategic partnerships with industry-leading technology providers to enhance our service offerings and deliver even more value to our clients.',
-      date: 'October 5, 2025',
-      author: 'PR Department',
-      image: newsImage1
-    },
-    {
-      title: 'Award-Winning Team Recognized for Innovation',
-      excerpt: 'Our development team has been recognized with the Innovation Excellence Award for outstanding contributions to web technology and digital transformation.',
-      date: 'September 28, 2025',
-      author: 'Editorial Team',
-      image: newsImage3
-    },
-    {
-      title: 'New Office Opening in San Francisco',
-      excerpt: 'Expanding our presence on the West Coast, we are pleased to announce the opening of our new office in San Francisco to better serve our clients in the region.',
-      date: 'September 20, 2025',
-      author: 'Corporate Communications',
-      image: newsImage1
-    },
-    {
-      title: 'Webinar Series: Modern Web Development Best Practices',
-      excerpt: 'Join our experts for a comprehensive webinar series covering the latest trends and best practices in modern web development, starting next month.',
-      date: 'September 15, 2025',
-      author: 'Education Team',
-      image: newsImage3
-    },
-    {
-      title: 'Customer Success Story: 10x Growth Achievement',
-      excerpt: 'Learn how we helped a mid-sized e-commerce business achieve 10x growth through our comprehensive web development and hosting solutions.',
-      date: 'September 10, 2025',
-      author: 'Case Study Team',
-      image: newsImage2
-    }
-  ];
+  const { data: newsArticles = [], isLoading } = useQuery<NewsArticle[]>({
+    queryKey: ['/api/news'],
+  });
+
+  const getImageForArticle = (image: string | null) => {
+    if (image && image.startsWith('http')) return image;
+    return Math.random() > 0.5 ? newsImage1 : newsImage2;
+  };
+
+  const formatDate = (date: Date | string) => {
+    return new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
 
   return (
     <div className="min-h-screen">
@@ -67,11 +40,22 @@ export default function CompanyNews() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {newsArticles.map((article, index) => (
-            <NewsCard key={index} {...article} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center text-muted-foreground">Loading news articles...</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {newsArticles.map((article) => (
+              <NewsCard 
+                key={article.id}
+                title={article.title}
+                excerpt={article.excerpt}
+                date={formatDate(article.createdAt)}
+                author={article.author}
+                image={getImageForArticle(article.image)}
+              />
+            ))}
+          </div>
+        )}
       </section>
 
       <Footer />

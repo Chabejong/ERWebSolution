@@ -1,12 +1,24 @@
 import { Navigation } from '@/components/Navigation';
 import { PortfolioCard } from '@/components/PortfolioCard';
 import { Footer } from '@/components/Footer';
+import { useQuery } from '@tanstack/react-query';
+import type { PortfolioProject } from '@shared/schema';
 import projectImage1 from '@assets/generated_images/Web_development_workspace_b730583d.png';
 import projectImage2 from '@assets/generated_images/Design_team_reviewing_work_cc87582c.png';
 import projectImage3 from '@assets/generated_images/Cloud_hosting_technology_concept_568859e4.png';
 
 export default function Reference() {
-  const projects = [
+  const { data: portfolioProjects = [], isLoading } = useQuery<PortfolioProject[]>({
+    queryKey: ['/api/portfolio'],
+  });
+
+  const getImageForProject = (image: string) => {
+    if (image.startsWith('http')) return image;
+    const images = [projectImage1, projectImage2, projectImage3];
+    return images[Math.floor(Math.random() * images.length)];
+  };
+
+  const mockProjects = [
     {
       image: projectImage1,
       title: 'Global E-Commerce Platform',
@@ -44,6 +56,16 @@ export default function Reference() {
       description: 'Custom ERP system for inventory and production management'
     }
   ];
+  
+  const projects = portfolioProjects.length > 0 
+    ? portfolioProjects.map(p => ({
+        image: getImageForProject(p.image),
+        title: p.title,
+        category: p.category,
+        description: p.description,
+        link: p.link
+      }))
+    : mockProjects;
 
   return (
     <div className="min-h-screen">
@@ -61,11 +83,15 @@ export default function Reference() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <PortfolioCard key={index} {...project} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center text-muted-foreground">Loading portfolio projects...</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <PortfolioCard key={index} {...project} />
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="bg-card py-20">
