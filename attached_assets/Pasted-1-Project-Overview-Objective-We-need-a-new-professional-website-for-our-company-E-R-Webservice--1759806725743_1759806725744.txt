@@ -1,0 +1,44 @@
+1. Project Overview & Objective
+We need a new, professional website for our company, E&R Webservice. The primary goal is to serve as a central hub to acquire new clients by showcasing our services in web app design, website development, and hosting services. Our target audience includes companies, small businesses, and associations.
+The site must be modern, clean, trustworthy, and easy to navigate. I will provide the company logo.
+2. Sitemap & Navigation Structure
+The main navigation should be a horizontal top menu bar with the following pages and structure:
+•	Home
+•	Service
+•	Reference (Showcase of past projects)
+•	Partner
+•	Contact
+•	Company (This item must have a dropdown menu)
+	About Us
+	History
+	News & Press
+3. Page-Specific Requirements
+Home Page:
+•	Header: A static photo gallery (a sliding carousel) should be the first visual element. This will serve as the main banner/hero section. We will provide the high-quality images.
+•	Body: The main body of the homepage should also feature a separate, integrated static photo gallery (e.g., a grid of 4-6 images) to showcase our work, team, or technology. This section should be visually distinct from the header gallery. It should bee design into three different sections, each with write up and photo.
+•	Content should include a clear value proposition, brief introduction to our three core services, and prominent calls-to-action (e.g., "Get a Quote," "View Our Services").
+Service Page:
+•	Dedicated sections for our three core offerings:
+1.	Web App Design
+2.	Website Development
+3.	Hosting Services
+•	Each section should have a brief description and a link to learn more (could link to sub-pages later).
+Reference Page:
+•	A portfolio/gallery to display case studies, client logos, and links to live projects.
+Company Dropdown Pages:
+•	About Us: Company mission, vision, and team bios.
+•	History: A timeline or narrative of our company's journey.
+•	News & Press: A blog-style layout for company announcements, articles, and press releases.
+Contact Page:
+•	A simple contact form (Name, Email, Company, Message).
+•	Our full company address, phone number, and email address displayed clearly.
+4. Technical & Design Requirements
+•	Design: Clean, modern, and professional. Use the provided logo as the starting point for the design style. The color scheme should be corporate yet approachable.
+•	Responsiveness: The website must be fully responsive and function flawlessly on all devices (desktop, tablet, mobile).
+•	Performance: Fast loading times are critical. Optimize images and code.
+•	CMS: Please build it on a content management system (like WordPress) so we can easily update the "News & Press" section and other text/content in the future.
+•	SEO: The codebase should be structured with best practices for SEO (clean URLs, proper heading tags, meta tags, alt text for images, etc.).
+5. Assets Provided
+•	E&R Webservice Logo (in multiple formats)
+•	Copy and text content for all pages.
+•	High-quality images for the header and body galleries on the homepage.
