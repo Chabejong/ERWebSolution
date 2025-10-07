@@ -42,11 +42,12 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 - **Admin** - CMS dashboard (News, Portfolio, Contacts management)
 
 ## Recent Changes (Current Session)
-1. ✅ Updated logo to CN3M branding
+1. ✅ Updated logo to CN3M branding (increased to 56px for better visibility)
 2. ✅ Repositioned navigation to left-aligned layout
 3. ✅ Added "Building of Databases" as fourth core service
 4. ✅ Added "Make a Payment" to Company dropdown menu
 5. ✅ Implemented hero images across all pages using client-provided futuristic laptop images
+6. ✅ Replaced all people photos with tech-themed imagery (web interfaces, coding screens, devices)
 
 ## Important Notes
 
@@ -54,10 +55,13 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 1. **PayPal Link**: The "Make a Payment" menu item currently uses a placeholder PayPal link (`https://www.paypal.com/paypalme/yourpaypallink`). This needs to be updated with the actual PayPal.me link.
    - Location: `client/src/components/Navigation.tsx` (lines 108 and 174)
 
-2. **Diverse Stock Images**: The user requested that all images with people should represent diverse races and ethnicities. The stock image tool was unable to retrieve suitable images. Current images are either:
-   - AI-generated images from previous sessions
-   - Client-provided futuristic laptop/web design concept images (no people)
-   - **Recommendation**: Replace people images manually or through the admin dashboard with diverse representation
+### Tech-Themed Imagery
+All images featuring people have been replaced with technology-focused stock photos:
+- **Home Page**: Abstract web interfaces, laptop with code, modern web development screens
+- **Company About**: Laptop screen with code
+- **Company News**: Coding screens and database/network technology concepts
+- **Reference/Portfolio**: Laptops with code and abstract web interfaces
+- All images reflect web design and technology themes (wireframes, UI mockups, devices, coding symbols)
 
 ### Hero Images
 All pages now feature consistent hero sections with:
