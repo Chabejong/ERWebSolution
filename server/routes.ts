@@ -38,12 +38,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/news/:id", async (req, res) => {
     try {
-      const article = await storage.updateNewsArticle(req.params.id, req.body);
+      const validatedData = insertNewsArticleSchema.partial().parse(req.body);
+      const article = await storage.updateNewsArticle(req.params.id, validatedData);
       if (!article) {
         return res.status(404).json({ error: "Article not found" });
       }
       res.json(article);
     } catch (error) {
+      if (error instanceof Error && error.name === 'ZodError') {
+        return res.status(400).json({ error: "Invalid article data" });
+      }
       res.status(500).json({ error: "Failed to update article" });
     }
   });
@@ -93,12 +97,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/portfolio/:id", async (req, res) => {
     try {
-      const project = await storage.updatePortfolioProject(req.params.id, req.body);
+      const validatedData = insertPortfolioProjectSchema.partial().parse(req.body);
+      const project = await storage.updatePortfolioProject(req.params.id, validatedData);
       if (!project) {
         return res.status(404).json({ error: "Project not found" });
       }
       res.json(project);
     } catch (error) {
+      if (error instanceof Error && error.name === 'ZodError') {
+        return res.status(400).json({ error: "Invalid project data" });
+      }
       res.status(500).json({ error: "Failed to update project" });
     }
   });
