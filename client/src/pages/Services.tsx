@@ -78,6 +78,17 @@ export default function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ServiceCard
+            icon={Database}
+            title="Building of Databases"
+            description="Custom database solutions designed for your specific needs"
+            features={[
+              'Database architecture design',
+              'Custom schema development',
+              'Data modeling and optimization',
+              'Migration and integration services'
+            ]}
+          />
+          <ServiceCard
             icon={Smartphone}
             title="Mobile Development"
             description="Native and cross-platform mobile applications"
@@ -97,17 +108,6 @@ export default function Services() {
               'Inventory management',
               'Order processing',
               'Customer analytics'
-            ]}
-          />
-          <ServiceCard
-            icon={Database}
-            title="Database Management"
-            description="Robust data solutions for your business"
-            features={[
-              'Database design',
-              'Migration services',
-              'Performance optimization',
-              'Backup and recovery'
             ]}
           />
         </div>
