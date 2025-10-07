@@ -4,7 +4,7 @@ import { ServiceCard } from '@/components/ServiceCard';
 import { FeatureSection } from '@/components/FeatureSection';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Code2, Globe, Server } from 'lucide-react';
+import { Code2, Globe, Server, Database } from 'lucide-react';
 import heroImage1 from '@assets/generated_images/Corporate_office_workspace_hero_22c497b8.png';
 import heroImage2 from '@assets/generated_images/Business_team_collaboration_0246ba0f.png';
 import heroImage3 from '@assets/generated_images/Data_center_technology_infrastructure_5648b83b.png';
@@ -47,7 +47,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <ServiceCard
             icon={Code2}
             title="Web App Design"
@@ -79,6 +79,17 @@ export default function Home() {
               'Daily backups',
               'SSL certificates included',
               '24/7 technical support'
+            ]}
+          />
+          <ServiceCard
+            icon={Database}
+            title="Building of Databases"
+            description="Custom database solutions for your business"
+            features={[
+              'Database architecture design',
+              'Data modeling',
+              'Performance optimization',
+              'Migration services'
             ]}
           />
         </div>
