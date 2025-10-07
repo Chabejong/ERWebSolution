@@ -11,6 +11,7 @@ import Contact from "@/pages/Contact";
 import CompanyAbout from "@/pages/CompanyAbout";
 import CompanyHistory from "@/pages/CompanyHistory";
 import CompanyNews from "@/pages/CompanyNews";
+import Admin from "@/pages/Admin";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/company/about" component={CompanyAbout} />
       <Route path="/company/history" component={CompanyHistory} />
       <Route path="/company/news" component={CompanyNews} />
+      <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   );
