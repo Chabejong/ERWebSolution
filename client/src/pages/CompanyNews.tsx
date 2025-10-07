@@ -3,7 +3,7 @@ import { NewsCard } from '@/components/NewsCard';
 import { Footer } from '@/components/Footer';
 import { useQuery } from '@tanstack/react-query';
 import type { NewsArticle } from '@shared/schema';
-import newsImage1 from '@assets/generated_images/Business_team_collaboration_0246ba0f.png';
+import newsImage1 from '@assets/stock_images/african_web_develope_94c8a6c8.jpg';
 import newsImage2 from '@assets/generated_images/Data_center_technology_infrastructure_5648b83b.png';
 import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_0_1759860120116.jpg';
 

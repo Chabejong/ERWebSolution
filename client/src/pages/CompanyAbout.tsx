@@ -2,7 +2,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Target, Eye, Award } from 'lucide-react';
-import teamImage from '@assets/generated_images/Business_team_collaboration_0246ba0f.png';
+import teamImage from '@assets/stock_images/african_professional_d05f9fe3.jpg';
 import heroImage from '@assets/Lucid_Origin_a_vibrant_digital_illustration_of_a_website_desig_1_1759860120116.jpg';
 
 export default function CompanyAbout() {
