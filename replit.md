@@ -59,11 +59,11 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 
 ### Tech-Themed Imagery
 All images featuring people have been replaced with technology-focused stock photos:
-- **Home Page**: Abstract web interfaces, laptop with code, modern web development screens
-- **Company About**: Laptop screen with code
-- **Company News**: Coding screens and database/network technology concepts
-- **Reference/Portfolio**: Laptops with code and abstract web interfaces
-- All images reflect web design and technology themes (wireframes, UI mockups, devices, coding symbols)
+- **Home Page**: Abstract web interfaces, responsive web solution (devices), computer with cables/monitor, modern web development screens
+- **Company About**: Green landscape with networked computers
+- **Company News**: Green landscape with vintage CRT monitors showing code, database/network technology
+- **Reference/Portfolio**: Green landscape with networked computer systems, abstract web interfaces
+- All images reflect web design and technology themes (wireframes, UI mockups, devices, coding symbols, network infrastructure)
 
 ### Hero Images
 All pages now feature consistent hero sections with:
