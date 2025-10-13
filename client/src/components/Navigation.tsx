@@ -24,7 +24,7 @@ export function Navigation() {
             <img src={logoImage} alt="CN3M Logo" className="h-14 w-auto" />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden sm:flex items-center space-x-1 flex-wrap gap-1">
             <Link href="/" data-testid="link-nav-home">
               <Button 
                 variant={isActive('/') ? 'secondary' : 'ghost'} 
@@ -119,7 +119,7 @@ export function Navigation() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden hover-elevate"
+            className="sm:hidden hover-elevate"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             data-testid="button-mobile-menu"
           >
@@ -129,7 +129,7 @@ export function Navigation() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border">
+        <div className="sm:hidden border-t border-border">
           <div className="px-4 py-4 space-y-2">
             <Link href="/" onClick={() => setMobileMenuOpen(false)}>
               <Button variant={isActive('/') ? 'secondary' : 'ghost'} className="w-full justify-start hover-elevate">
