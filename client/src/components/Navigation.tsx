@@ -19,13 +19,13 @@ export function Navigation() {
   return (
     <nav className="sticky top-0 z-50 w-full backdrop-blur-lg bg-background/80 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16">
-          <Link href="/" className="flex items-center space-x-3 mr-8" data-testid="link-home">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="flex items-center space-x-3" data-testid="link-home">
             <img src={logoImage} alt="CN3M Logo" className="h-14 w-auto" />
             <span className="text-xl font-bold">E&R WebSolution</span>
           </Link>
 
-          <div className="flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1">
             <Link href="/" data-testid="link-nav-home">
               <Button 
                 variant={isActive('/') ? 'secondary' : 'ghost'} 
