@@ -3,7 +3,7 @@ import { NewsCard } from '@/components/NewsCard';
 import { Footer } from '@/components/Footer';
 import { useQuery } from '@tanstack/react-query';
 import type { NewsArticle } from '@shared/schema';
-import newsImage1 from '@assets/stock_images/grayscale_hands_on_k_a916567b.jpg';
+import newsImage1 from '@assets/Lucid_Origin_design_a_vibrant_green_landscape_with_rolling_hil_2_1760388591898.jpg';
 import newsImage2 from '@assets/stock_images/database_network_tec_854dd866.jpg';
 import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_0_1759860120116.jpg';
 

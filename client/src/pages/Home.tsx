@@ -5,11 +5,11 @@ import { FeatureSection } from '@/components/FeatureSection';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Code2, Globe, Server, Database } from 'lucide-react';
-import heroImage1 from '@assets/stock_images/abstract_web_interfa_4f2b9d59.jpg';
+import heroImage1 from '@assets/stock_images/laptop_screen_with_c_472be1aa.jpg';
 import heroImage2 from '@assets/Lucid_Origin_Design_a_responsive_web_solution_that_adapts_to_v_1_1760384954180.jpg';
 import heroImage3 from '@assets/generated_images/Data_center_technology_infrastructure_5648b83b.png';
-import devImage from '@assets/stock_images/grayscale_hands_on_k_c2f1f7b9.jpg';
-import designImage from '@assets/stock_images/abstract_web_interfa_57d8a322.jpg';
+import devImage from '@assets/Lucid_Origin_design_a_computer_with_cables_and_monitor_featuri_3_1760388591896.jpg';
+import designImage from '@assets/stock_images/abstract_web_interfa_ee660948.jpg';
 import hostingImage from '@assets/generated_images/Cloud_hosting_technology_concept_568859e4.png';
 
 export default function Home() {
