@@ -6,7 +6,7 @@ import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Code2, Globe, Server, Database } from 'lucide-react';
 import heroImage1 from '@assets/stock_images/abstract_web_interfa_4f2b9d59.jpg';
-import heroImage2 from '@assets/stock_images/black_and_white_hand_4600fa91.jpg';
+import heroImage2 from '@assets/Lucid_Origin_Design_a_responsive_web_solution_that_adapts_to_v_1_1760384954180.jpg';
 import heroImage3 from '@assets/generated_images/Data_center_technology_infrastructure_5648b83b.png';
 import devImage from '@assets/stock_images/grayscale_hands_on_k_c2f1f7b9.jpg';
 import designImage from '@assets/stock_images/abstract_web_interfa_57d8a322.jpg';
