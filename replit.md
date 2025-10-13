@@ -50,6 +50,8 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 6. ✅ Replaced all people photos with tech-themed imagery (web interfaces, coding screens, devices)
 7. ✅ Converted all photographs with human hands to black and white/grayscale
 8. ✅ Updated home page hero carousel with "Responsive Web solution" image showing multiple devices
+9. ✅ Replaced all grayscale/hand images with new tech landscape images (computer with cables, networked computers in green landscapes)
+10. ✅ Added "E&R WebSolution" company name after the logo in navigation
 
 ## Important Notes
 
