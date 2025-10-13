@@ -75,40 +75,45 @@ export function Navigation() {
               </Button>
             </Link>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant={location.startsWith('/company') ? 'secondary' : 'ghost'} 
-                  size="sm"
-                  className="hover-elevate"
-                  data-testid="button-nav-company"
-                >
-                  Company <ChevronDown className="ml-1 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <Link href="/company/about" data-testid="link-nav-about">
-                  <DropdownMenuItem className="hover-elevate cursor-pointer">
-                    About Us
-                  </DropdownMenuItem>
-                </Link>
-                <Link href="/company/history" data-testid="link-nav-history">
-                  <DropdownMenuItem className="hover-elevate cursor-pointer">
-                    History
-                  </DropdownMenuItem>
-                </Link>
-                <Link href="/company/news" data-testid="link-nav-news">
-                  <DropdownMenuItem className="hover-elevate cursor-pointer">
-                    News & Press
-                  </DropdownMenuItem>
-                </Link>
-                <a href="https://www.paypal.com/paypalme/yourpaypallink" target="_blank" rel="noopener noreferrer" data-testid="link-nav-payment">
-                  <DropdownMenuItem className="hover-elevate cursor-pointer">
-                    Make a Payment
-                  </DropdownMenuItem>
-                </a>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Link href="/company/about" data-testid="link-nav-about">
+              <Button 
+                variant={isActive('/company/about') ? 'secondary' : 'ghost'} 
+                size="sm"
+                className="hover-elevate"
+              >
+                About Us
+              </Button>
+            </Link>
+
+            <Link href="/company/history" data-testid="link-nav-history">
+              <Button 
+                variant={isActive('/company/history') ? 'secondary' : 'ghost'} 
+                size="sm"
+                className="hover-elevate"
+              >
+                History
+              </Button>
+            </Link>
+
+            <Link href="/company/news" data-testid="link-nav-news">
+              <Button 
+                variant={isActive('/company/news') ? 'secondary' : 'ghost'} 
+                size="sm"
+                className="hover-elevate"
+              >
+                News & Press
+              </Button>
+            </Link>
+
+            <a href="https://www.paypal.com/paypalme/yourpaypallink" target="_blank" rel="noopener noreferrer" data-testid="link-nav-payment">
+              <Button 
+                variant="ghost"
+                size="sm"
+                className="hover-elevate"
+              >
+                Make a Payment
+              </Button>
+            </a>
           </div>
 
           <Button
@@ -151,29 +156,26 @@ export function Navigation() {
                 Contact
               </Button>
             </Link>
-            <div className="border-t border-border pt-2 mt-2">
-              <p className="px-3 py-2 text-sm font-medium text-muted-foreground">Company</p>
-              <Link href="/company/about" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start pl-6 hover-elevate">
-                  About Us
-                </Button>
-              </Link>
-              <Link href="/company/history" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start pl-6 hover-elevate">
-                  History
-                </Button>
-              </Link>
-              <Link href="/company/news" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start pl-6 hover-elevate">
-                  News & Press
-                </Button>
-              </Link>
-              <a href="https://www.paypal.com/paypalme/yourpaypallink" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start pl-6 hover-elevate">
-                  Make a Payment
-                </Button>
-              </a>
-            </div>
+            <Link href="/company/about" onClick={() => setMobileMenuOpen(false)}>
+              <Button variant={isActive('/company/about') ? 'secondary' : 'ghost'} className="w-full justify-start hover-elevate">
+                About Us
+              </Button>
+            </Link>
+            <Link href="/company/history" onClick={() => setMobileMenuOpen(false)}>
+              <Button variant={isActive('/company/history') ? 'secondary' : 'ghost'} className="w-full justify-start hover-elevate">
+                History
+              </Button>
+            </Link>
+            <Link href="/company/news" onClick={() => setMobileMenuOpen(false)}>
+              <Button variant={isActive('/company/news') ? 'secondary' : 'ghost'} className="w-full justify-start hover-elevate">
+                News & Press
+              </Button>
+            </Link>
+            <a href="https://www.paypal.com/paypalme/yourpaypallink" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
+              <Button variant="ghost" className="w-full justify-start hover-elevate">
+                Make a Payment
+              </Button>
+            </a>
           </div>
         </div>
       )}

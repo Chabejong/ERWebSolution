@@ -53,6 +53,7 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 9. ✅ Replaced all grayscale/hand images with new tech landscape images (computer with cables, networked computers in green landscapes)
 10. ✅ Moved "E&R WebSolution" from navigation menu to centered heading below hero images on all pages
 11. ✅ Fixed responsive navigation layout to prevent overflow on smaller screens - desktop nav hidden on mobile, hamburger menu shows instead
+12. ✅ Removed Company dropdown menu - all menu items now appear directly on the navigation bar (Home, Services, Reference, Partner, Contact, About Us, History, News & Press, Make a Payment)
 
 ## Important Notes
 
