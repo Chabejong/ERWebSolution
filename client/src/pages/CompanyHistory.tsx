@@ -58,6 +58,12 @@ export default function CompanyHistory() {
         </div>
       </section>
 
+      <div className="bg-card border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold">E&R WebSolution</h2>
+        </div>
+      </div>
+
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="relative">
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border hidden md:block" />

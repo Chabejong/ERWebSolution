@@ -51,7 +51,7 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 7. ✅ Converted all photographs with human hands to black and white/grayscale
 8. ✅ Updated home page hero carousel with "Responsive Web solution" image showing multiple devices
 9. ✅ Replaced all grayscale/hand images with new tech landscape images (computer with cables, networked computers in green landscapes)
-10. ✅ Added "E&R WebSolution" company name after the logo in navigation
+10. ✅ Moved "E&R WebSolution" from navigation menu to centered heading below hero images on all pages
 11. ✅ Fixed responsive navigation layout to prevent overflow on smaller screens - desktop nav hidden on mobile, hamburger menu shows instead
 
 ## Important Notes
