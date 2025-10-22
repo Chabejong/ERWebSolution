@@ -71,8 +71,8 @@ export default function Contact() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground" data-testid="text-phone">+1 (555) 123-4567</p>
-                  <p className="text-muted-foreground">+1 (555) 123-4568 (Support)</p>
+                  <p className="text-muted-foreground" data-testid="text-phone">+49 15735707057</p> {/* Updated phone number */}
+                  <p className="text-muted-foreground">+49 15735707057 (Support)</p>
                 </CardContent>
               </Card>
 
