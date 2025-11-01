@@ -51,9 +51,15 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Health check endpoint for deployment
+  // Health check endpoint for Autoscale Deployments
+  // Must be registered BEFORE other routes to ensure it responds quickly
   app.get("/health", (_req, res) => {
-    res.status(200).json({ status: "ok" });
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  // Root health check - Autoscale sends health checks to '/' by default
+  app.head("/", (_req, res) => {
+    res.status(200).end();
   });
 
   const server = await registerRoutes(app);
