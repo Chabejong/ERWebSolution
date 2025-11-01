@@ -66,28 +66,9 @@ app.use((req, res, next) => {
     });
 
     // Root health check - Autoscale sends health checks to '/' by default
-    // Support both HEAD and GET methods
+    // Use HEAD method for health checks to avoid interfering with the homepage
     app.head("/", (_req, res) => {
       res.status(200).end();
-    });
-    
-    app.get("/", (_req, res, next) => {
-      // Only respond to health checks (no accept header or health check user agents)
-      const accept = _req.get('accept');
-      const userAgent = _req.get('user-agent') || '';
-      
-      // Health check requests typically don't have specific accept headers
-      // or come from monitoring services
-      if (!accept || accept === '*/*' || userAgent.includes('health') || userAgent.includes('check')) {
-        return res.status(200).json({ 
-          status: "ok", 
-          timestamp: new Date().toISOString(),
-          env: process.env.NODE_ENV 
-        });
-      }
-      
-      // Otherwise, let it fall through to the static file handler
-      next();
     });
     
     console.log("Step 2: Health check endpoints registered");
@@ -139,7 +120,6 @@ app.use((req, res, next) => {
         console.log("=== Server started successfully ===");
         console.log(`Server is listening on http://0.0.0.0:${port}`);
         console.log("Health check endpoints:");
-        console.log("  - GET /");
         console.log("  - HEAD /");
         console.log("  - GET /health");
         console.log("Server is running and ready to accept connections");
