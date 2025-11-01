@@ -13,7 +13,9 @@ export default function CompanyNews() {
   });
 
   const getImageForArticle = (image: string | null) => {
-    if (image && image.startsWith('http')) return image;
+    if (image && (image.startsWith('http') || image.startsWith('/objects/'))) {
+      return image;
+    }
     return Math.random() > 0.5 ? newsImage1 : newsImage2;
   };
 

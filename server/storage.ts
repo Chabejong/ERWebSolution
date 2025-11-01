@@ -199,4 +199,88 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+import { db } from './db';
+import * as schema from '@shared/schema';
+import { eq, desc } from 'drizzle-orm';
+
+export class DbStorage implements IStorage {
+  async getUser(id: string): Promise<User | undefined> {
+    const result = await db.select().from(schema.users).where(eq(schema.users.id, id)).limit(1);
+    return result[0];
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const result = await db.select().from(schema.users).where(eq(schema.users.username, username)).limit(1);
+    return result[0];
+  }
+
+  async createUser(user: InsertUser): Promise<User> {
+    const result = await db.insert(schema.users).values(user).returning();
+    return result[0];
+  }
+
+  async getAllNewsArticles(): Promise<NewsArticle[]> {
+    return await db.select().from(schema.newsArticles).orderBy(desc(schema.newsArticles.createdAt));
+  }
+
+  async getNewsArticle(id: string): Promise<NewsArticle | undefined> {
+    const result = await db.select().from(schema.newsArticles).where(eq(schema.newsArticles.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createNewsArticle(article: InsertNewsArticle): Promise<NewsArticle> {
+    const result = await db.insert(schema.newsArticles).values(article).returning();
+    return result[0];
+  }
+
+  async updateNewsArticle(id: string, article: Partial<InsertNewsArticle>): Promise<NewsArticle | undefined> {
+    const result = await db.update(schema.newsArticles)
+      .set({ ...article, updatedAt: new Date() })
+      .where(eq(schema.newsArticles.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteNewsArticle(id: string): Promise<boolean> {
+    const result = await db.delete(schema.newsArticles).where(eq(schema.newsArticles.id, id)).returning();
+    return result.length > 0;
+  }
+
+  async getAllPortfolioProjects(): Promise<PortfolioProject[]> {
+    return await db.select().from(schema.portfolioProjects).orderBy(desc(schema.portfolioProjects.createdAt));
+  }
+
+  async getPortfolioProject(id: string): Promise<PortfolioProject | undefined> {
+    const result = await db.select().from(schema.portfolioProjects).where(eq(schema.portfolioProjects.id, id)).limit(1);
+    return result[0];
+  }
+
+  async createPortfolioProject(project: InsertPortfolioProject): Promise<PortfolioProject> {
+    const result = await db.insert(schema.portfolioProjects).values(project).returning();
+    return result[0];
+  }
+
+  async updatePortfolioProject(id: string, project: Partial<InsertPortfolioProject>): Promise<PortfolioProject | undefined> {
+    const result = await db.update(schema.portfolioProjects)
+      .set(project)
+      .where(eq(schema.portfolioProjects.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deletePortfolioProject(id: string): Promise<boolean> {
+    const result = await db.delete(schema.portfolioProjects).where(eq(schema.portfolioProjects.id, id)).returning();
+    return result.length > 0;
+  }
+
+  async createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission> {
+    const result = await db.insert(schema.contactSubmissions).values(submission).returning();
+    return result[0];
+  }
+
+  async getAllContactSubmissions(): Promise<ContactSubmission[]> {
+    return await db.select().from(schema.contactSubmissions).orderBy(desc(schema.contactSubmissions.createdAt));
+  }
+}
+
+export const storage = new DbStorage();
