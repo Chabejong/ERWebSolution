@@ -102,7 +102,7 @@ export function Navigation() {
                     News & Press
                   </DropdownMenuItem>
                 </Link>
-                <a href="https://www.paypal.com/paypalme/yourpaypallink" target="_blank" rel="noopener noreferrer" data-testid="link-nav-payment">
+                <a href="https://www.paypal.com/paypalme/nkwettae" target="_blank" rel="noopener noreferrer" data-testid="link-nav-payment">
                   <DropdownMenuItem className="hover-elevate cursor-pointer">
                     Make a Payment
                   </DropdownMenuItem>
@@ -168,7 +168,7 @@ export function Navigation() {
                   News & Press
                 </Button>
               </Link>
-              <a href="https://www.paypal.com/paypalme/yourpaypallink" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
+              <a href="https://www.paypal.com/paypalme/nkwettae" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                 <Button variant="ghost" className="w-full justify-start pl-6 hover-elevate">
                   Make a Payment
                 </Button>

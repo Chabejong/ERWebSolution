@@ -77,9 +77,10 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 - Viewing contact submissions requires authentication
 - Public can still view published news and portfolio items
 
-### Action Required
-1. **PayPal Link**: The "Make a Payment" menu item currently uses a placeholder PayPal link (`https://www.paypal.com/paypalme/yourpaypallink`). This needs to be updated with the actual PayPal.me link.
-   - Location: `client/src/components/Navigation.tsx`
+### Completed Features
+- **PayPal Payment Link**: Updated "Make a Payment" menu item with actual PayPal.me link (https://www.paypal.com/paypalme/nkwettae)
+  - Location: `client/src/components/Navigation.tsx`
+  - Works in both desktop and mobile navigation menus
 
 ### Tech-Themed Imagery
 All images featuring people have been replaced with technology-focused stock photos:
