@@ -7,7 +7,8 @@ neonConfig.webSocketConstructor = ws;
 
 if (!process.env.DATABASE_URL) {
   throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
+    "DATABASE_URL not set. Please configure DATABASE_URL in your deployment environment variables. " +
+    "Go to your deployment settings and add DATABASE_URL with the value from your Replit secrets."
   );
 }
 

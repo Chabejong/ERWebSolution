@@ -51,10 +51,11 @@ export class ObjectStorageService {
       )
     );
     if (paths.length === 0) {
-      throw new Error(
-        "PUBLIC_OBJECT_SEARCH_PATHS not set. Create a bucket in 'Object Storage' " +
-          "tool and set PUBLIC_OBJECT_SEARCH_PATHS env var (comma-separated paths)."
+      console.error(
+        "PUBLIC_OBJECT_SEARCH_PATHS not set. Object storage features will be unavailable. " +
+          "Set PUBLIC_OBJECT_SEARCH_PATHS in your deployment environment variables."
       );
+      return [];
     }
     return paths;
   }
@@ -62,10 +63,11 @@ export class ObjectStorageService {
   getPrivateObjectDir(): string {
     const dir = process.env.PRIVATE_OBJECT_DIR || "";
     if (!dir) {
-      throw new Error(
-        "PRIVATE_OBJECT_DIR not set. Create a bucket in 'Object Storage' " +
-          "tool and set PRIVATE_OBJECT_DIR env var."
+      console.error(
+        "PRIVATE_OBJECT_DIR not set. Object storage features will be unavailable. " +
+          "Set PRIVATE_OBJECT_DIR in your deployment environment variables."
       );
+      return "";
     }
     return dir;
   }
