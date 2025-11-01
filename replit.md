@@ -17,12 +17,13 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 - ✅ Multi-page navigation with dropdown menus
 - ✅ Hero images on all pages using client-provided images
 - ✅ Admin dashboard for CMS management
-- ✅ News & Press article management
+- ✅ News & Press article management with secure image upload
 - ✅ Portfolio/reference project showcase
 - ✅ Contact form with database storage
 - ✅ Fully responsive design
 - ✅ SEO optimization
 - ✅ Left-aligned navigation with CN3M logo
+- ✅ Object storage integration with ACL security
 
 ## Services Offered
 1. **Web App Design** - Custom web applications with modern UI/UX
@@ -58,6 +59,7 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 14. ✅ Fixed "Read more" button on News & Press page - now clickable and expands to show full article content
 15. ✅ Fixed "Learn more" button on Services page - only appears when expandable content available, reveals full description when clicked
 16. ✅ Implemented admin authentication system with session-based login (username: erwebservice@gmail.com, password: news_2025)
+17. ✅ Implemented secure file upload functionality for news article images with object storage and ACL enforcement
 
 ## Important Notes
 
@@ -92,9 +94,23 @@ All pages now feature consistent hero sections with:
 - Responsive height (400px mobile, 500px desktop)
 
 ### Database Schema
-- **News Articles** - title, excerpt, content, author, image, createdAt
+- **News Articles** - title, excerpt, content, author, image (stored in object storage), createdAt
 - **Portfolio Projects** - title, category, description, image, link
 - **Contact Submissions** - name, email, phone, company, message, createdAt
+
+### Object Storage & File Uploads
+The application uses Replit's object storage for secure image uploads:
+- **News Article Images**: Admin can upload images directly from their computer via the admin dashboard
+- **Security**: ACL (Access Control List) enforcement ensures proper access control
+- **Public Images**: News article images are marked as public and accessible to all visitors
+- **Upload Flow**: 
+  1. Admin clicks "Upload Image" button in news form
+  2. Selects image file from computer (max 10MB, images only)
+  3. File is uploaded to object storage with signed URL
+  4. Server stores object path in database
+  5. Images served from `/objects/:objectPath` with ACL permission checks
+- **Environment Variables**: `PUBLIC_OBJECT_SEARCH_PATHS`, `PRIVATE_OBJECT_DIR`
+- **Implementation Files**: `server/objectStorage.ts`, `server/objectAcl.ts`, `client/src/components/ObjectUploader.tsx`
 
 ### Mock Data
 The application contains mock data throughout with `//todo` comments for easy identification.
