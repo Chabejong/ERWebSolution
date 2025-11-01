@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import bcrypt from "bcryptjs";
 import { storage } from "./storage";
 import { insertNewsArticleSchema, insertPortfolioProjectSchema, insertContactSubmissionSchema } from "@shared/schema";
+import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "erwebservice@gmail.com";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "news_2025";
@@ -50,6 +51,65 @@ export async function registerRoutes(app: Express): Promise<Server> {
       isAuthenticated: !!req.session?.isAuthenticated,
       userId: req.session?.userId 
     });
+  });
+
+  app.post("/api/objects/upload", requireAuth, async (req, res) => {
+    try {
+      const objectStorageService = new ObjectStorageService();
+      const uploadURL = await objectStorageService.getObjectEntityUploadURL();
+      res.json({ uploadURL });
+    } catch (error) {
+      console.error("Error getting upload URL:", error);
+      res.status(500).json({ error: "Failed to get upload URL" });
+    }
+  });
+
+  app.get("/objects/:objectPath(*)", async (req, res) => {
+    const objectStorageService = new ObjectStorageService();
+    try {
+      const objectFile = await objectStorageService.getObjectEntityFile(req.path);
+      
+      const userId = req.session?.userId;
+      const canAccess = await objectStorageService.canAccessObjectEntity({
+        objectFile,
+        userId,
+      });
+      
+      if (!canAccess) {
+        return res.sendStatus(403);
+      }
+      
+      objectStorageService.downloadObject(objectFile, res);
+    } catch (error) {
+      console.error("Error accessing object:", error);
+      if (error instanceof ObjectNotFoundError) {
+        return res.sendStatus(404);
+      }
+      return res.sendStatus(500);
+    }
+  });
+
+  app.put("/api/news-images", requireAuth, async (req, res) => {
+    if (!req.body.imageURL) {
+      return res.status(400).json({ error: "imageURL is required" });
+    }
+
+    try {
+      const userId = req.session?.userId || "admin";
+      const objectStorageService = new ObjectStorageService();
+      const objectPath = await objectStorageService.trySetObjectEntityAclPolicy(
+        req.body.imageURL,
+        {
+          owner: userId,
+          visibility: "public",
+        }
+      );
+
+      res.status(200).json({ objectPath });
+    } catch (error) {
+      console.error("Error setting news image:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
   });
 
   app.get("/api/news", async (_req, res) => {

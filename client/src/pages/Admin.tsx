@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { LoginForm } from '@/components/LoginForm';
+import { ObjectUploader } from '@/components/ObjectUploader';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -26,7 +27,7 @@ import {
   type NewsArticle,
   type PortfolioProject 
 } from '@shared/schema';
-import { Pencil, Trash2, LogOut } from 'lucide-react';
+import { Pencil, Trash2, LogOut, Upload } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,6 +48,7 @@ export default function Admin() {
   const [editingNews, setEditingNews] = useState<NewsArticle | null>(null);
   const [editingPortfolio, setEditingPortfolio] = useState<PortfolioProject | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'news' | 'portfolio'; id: string } | null>(null);
+  const [uploadedImagePath, setUploadedImagePath] = useState<string | null>(null);
 
   useEffect(() => {
     checkAuthStatus();
@@ -209,6 +211,7 @@ export default function Admin() {
 
   const handleNewsEdit = (article: NewsArticle) => {
     setEditingNews(article);
+    setUploadedImagePath(article.image || null);
     newsForm.reset({
       title: article.title,
       excerpt: article.excerpt,
@@ -229,12 +232,54 @@ export default function Admin() {
     });
   };
 
+  const handleGetUploadParameters = async () => {
+    const response = await fetch('/api/objects/upload', {
+      method: 'POST',
+    });
+    if (!response.ok) throw new Error('Failed to get upload URL');
+    const data = await response.json();
+    return {
+      method: 'PUT' as const,
+      url: data.uploadURL,
+    };
+  };
+
+  const handleUploadComplete = async (uploadURL: string) => {
+    try {
+      const response = await fetch('/api/news-images', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageURL: uploadURL }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUploadedImagePath(data.objectPath);
+        newsForm.setValue('image', data.objectPath);
+      } else {
+        toast({ 
+          title: 'Image upload failed', 
+          description: 'Failed to save image',
+          variant: 'destructive'
+        });
+      }
+    } catch (error) {
+      console.error('Error saving image:', error);
+      toast({ 
+        title: 'Image upload failed', 
+        description: 'Failed to save image',
+        variant: 'destructive'
+      });
+    }
+  };
+
   const onNewsSubmit = (data: NewsFormData) => {
     if (editingNews) {
       updateNewsMutation.mutate({ id: editingNews.id, data });
     } else {
       createNewsMutation.mutate(data);
     }
+    setUploadedImagePath(null);
   };
 
   const onPortfolioSubmit = (data: PortfolioFormData) => {
@@ -382,19 +427,26 @@ export default function Admin() {
                           </FormItem>
                         )}
                       />
-                      <FormField
-                        control={newsForm.control}
-                        name="image"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Image URL (optional)</FormLabel>
-                            <FormControl>
-                              <Input {...field} value={field.value || ''} data-testid="input-news-image" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
+                      <div className="space-y-2">
+                        <FormLabel>Article Image (optional)</FormLabel>
+                        <ObjectUploader
+                          maxNumberOfFiles={1}
+                          maxFileSize={10485760}
+                          onGetUploadParameters={handleGetUploadParameters}
+                          onComplete={handleUploadComplete}
+                          buttonClassName="w-full"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Upload className="h-4 w-4" />
+                            <span>Upload Image</span>
+                          </div>
+                        </ObjectUploader>
+                        {uploadedImagePath && (
+                          <p className="text-sm text-muted-foreground">
+                            Image uploaded: {uploadedImagePath}
+                          </p>
                         )}
-                      />
+                      </div>
                       <div className="flex gap-2">
                         <Button type="submit" className="hover-elevate" data-testid="button-submit-news">
                           {editingNews ? 'Update' : 'Create'} Article
