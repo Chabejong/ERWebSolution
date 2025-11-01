@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
+import { LoginForm } from '@/components/LoginForm';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +26,7 @@ import {
   type NewsArticle,
   type PortfolioProject 
 } from '@shared/schema';
-import { Pencil, Trash2, Plus } from 'lucide-react';
+import { Pencil, Trash2, LogOut } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,20 +43,52 @@ type PortfolioFormData = typeof insertPortfolioProjectSchema._type;
 
 export default function Admin() {
   const { toast } = useToast();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [editingNews, setEditingNews] = useState<NewsArticle | null>(null);
   const [editingPortfolio, setEditingPortfolio] = useState<PortfolioProject | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<{ type: 'news' | 'portfolio'; id: string } | null>(null);
 
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch('/api/auth/status');
+      const data = await response.json();
+      setIsAuthenticated(data.isAuthenticated);
+    } catch (error) {
+      setIsAuthenticated(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      setIsAuthenticated(false);
+      toast({ title: 'Logged out successfully' });
+    } catch (error) {
+      toast({ 
+        title: 'Logout failed', 
+        description: 'An error occurred',
+        variant: 'destructive'
+      });
+    }
+  };
+
   const { data: newsArticles = [] } = useQuery<NewsArticle[]>({
     queryKey: ['/api/news'],
+    enabled: isAuthenticated === true,
   });
 
   const { data: portfolioProjects = [] } = useQuery<PortfolioProject[]>({
     queryKey: ['/api/portfolio'],
+    enabled: isAuthenticated === true,
   });
 
   const { data: contactSubmissions = [] } = useQuery<any[]>({
     queryKey: ['/api/contact'],
+    enabled: isAuthenticated === true,
   });
 
   const newsForm = useForm<NewsFormData>({
@@ -212,18 +245,68 @@ export default function Admin() {
     }
   };
 
+  if (isAuthenticated === null) {
+    return (
+      <div className="min-h-screen">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <p className="text-lg text-muted-foreground">Loading...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen">
+        <Navigation />
+        
+        <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Admin Dashboard
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+              Please log in to access the admin dashboard
+            </p>
+          </div>
+        </section>
+
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <LoginForm onLoginSuccess={() => setIsAuthenticated(true)} />
+        </section>
+
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen">
       <Navigation />
       
       <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Admin Dashboard
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Manage news articles, portfolio projects, and view contact submissions
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            <div className="text-center flex-1">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                Admin Dashboard
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+                Manage news articles, portfolio projects, and view contact submissions
+              </p>
+            </div>
+            <Button 
+              variant="outline" 
+              onClick={handleLogout}
+              className="hover-elevate"
+              data-testid="button-logout"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
       </section>
 
