@@ -56,8 +56,8 @@ export default function Contact() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground" data-testid="text-email">info@er-webservice.com</p>
-                  <p className="text-muted-foreground">support@er-webservice.com</p>
+                  <p className="text-muted-foreground" data-testid="text-email">info@erwebservice.com</p>
+                  <p className="text-muted-foreground">support@erwebservice.com</p>
                 </CardContent>
               </Card>
 
@@ -88,9 +88,9 @@ export default function Contact() {
                 <CardContent>
                   <p className="text-muted-foreground" data-testid="text-address">
                     E&R Webservice<br />
-                    123 Business Avenue, Suite 100<br />
-                    New York, NY 10001<br />
-                    United States
+                    Schenkendorfstr. 1<br />
+                    51545 Waldbröl<br />
+                    Germany
                   </p>
                 </CardContent>
               </Card>

@@ -54,12 +54,13 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 10. ✅ Moved "E&R WebSolution" from navigation menu to centered heading below hero images on all pages
 11. ✅ Fixed responsive navigation layout to prevent overflow on smaller screens - hamburger menu shows on screens < 640px, full navigation bar shows on screens ≥ 640px
 12. ✅ Company dropdown menu contains: About Us, History, News & Press, and Make a Payment
+13. ✅ Updated all contact information across website (Contact page and Footer): Email (info@erwebservice.com), Phone (+49 15735707057), Address (Schenkendorfstr. 1, 51545 Waldbröl, Germany)
 
 ## Important Notes
 
 ### Action Required
 1. **PayPal Link**: The "Make a Payment" menu item currently uses a placeholder PayPal link (`https://www.paypal.com/paypalme/yourpaypallink`). This needs to be updated with the actual PayPal.me link.
-   - Location: `client/src/components/Navigation.tsx` (lines 108 and 174)
+   - Location: `client/src/components/Navigation.tsx`
 
 ### Tech-Themed Imagery
 All images featuring people have been replaced with technology-focused stock photos:
