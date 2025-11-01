@@ -9,6 +9,10 @@ console.log("PORT:", process.env.PORT || "5000 (default)");
 console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✓ Set" : "✗ Not set");
 
 const app = express();
+
+// Trust proxy - required for Replit deployments where SSL terminates at edge
+app.set('trust proxy', 1);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -20,6 +24,7 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
+      sameSite: 'lax', // Required for cookies to work in modern browsers
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     },
   })
