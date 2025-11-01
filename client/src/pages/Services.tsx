@@ -45,6 +45,7 @@ export default function Services() {
             icon={Code2}
             title="Web App Design"
             description="Custom web applications built with modern technologies"
+            fullDescription="Custom web applications built with modern technologies and cutting-edge frameworks. We specialize in creating intuitive, scalable, and high-performance web applications tailored to your business needs. Our design process focuses on user experience, accessibility, and seamless functionality across all platforms. From single-page applications to complex enterprise solutions, we deliver web apps that drive engagement and deliver measurable results."
             features={[
               'User-centric design approach',
               'Modern UI/UX principles',
@@ -58,6 +59,7 @@ export default function Services() {
             icon={Globe}
             title="Website Development"
             description="Professional websites that deliver results"
+            fullDescription="Professional websites that deliver results and exceed expectations. We build stunning, conversion-focused websites that represent your brand and engage your audience. Our development approach combines beautiful design with robust functionality, ensuring your website not only looks great but performs exceptionally. Whether you need a corporate website, landing page, or complex web portal, we create solutions that help your business grow online."
             features={[
               'SEO-friendly architecture',
               'Content management systems',
@@ -71,6 +73,7 @@ export default function Services() {
             icon={Server}
             title="Hosting Services"
             description="Reliable infrastructure for your applications"
+            fullDescription="Reliable infrastructure for your applications with enterprise-grade hosting solutions. Our hosting services provide the foundation your digital presence needs to thrive. We offer high-performance servers, robust security measures, and comprehensive support to keep your applications running smoothly 24/7. From shared hosting to dedicated servers and cloud solutions, we ensure your websites and applications are always fast, secure, and accessible to your users worldwide."
             features={[
               '99.9% uptime guarantee',
               'Daily backups',
@@ -94,6 +97,7 @@ export default function Services() {
             icon={Database}
             title="Building of Databases"
             description="Custom database solutions designed for your specific needs"
+            fullDescription="Custom database solutions designed for your specific needs and built to scale. We architect and implement robust database systems that power your applications efficiently and securely. Our expertise spans relational databases, NoSQL solutions, and data warehousing. From initial design to migration and ongoing optimization, we ensure your data infrastructure supports your business goals while maintaining performance, reliability, and security at every level."
             features={[
               'Database architecture design',
               'Custom schema development',
@@ -105,6 +109,7 @@ export default function Services() {
             icon={Smartphone}
             title="Mobile Development"
             description="Native and cross-platform mobile applications"
+            fullDescription="Native and cross-platform mobile applications that deliver exceptional user experiences. We create powerful mobile apps that engage users and drive business growth. Whether you need iOS, Android, or cross-platform solutions, our development team brings your mobile vision to life with intuitive interfaces and robust functionality. From concept to app store deployment and beyond, we handle every aspect of mobile development."
             features={[
               'iOS and Android apps',
               'React Native development',
@@ -116,6 +121,7 @@ export default function Services() {
             icon={ShoppingCart}
             title="E-Commerce Solutions"
             description="Complete online store solutions"
+            fullDescription="Complete online store solutions that drive sales and customer satisfaction. We build powerful e-commerce platforms that make it easy for your customers to shop and for you to manage your business. Our solutions integrate payment processing, inventory management, shipping, and analytics into one seamless system. Whether you're launching a new store or upgrading an existing one, we create e-commerce experiences that convert visitors into loyal customers."
             features={[
               'Payment gateway integration',
               'Inventory management',
