@@ -55,6 +55,7 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 11. ✅ Fixed responsive navigation layout to prevent overflow on smaller screens - hamburger menu shows on screens < 640px, full navigation bar shows on screens ≥ 640px
 12. ✅ Company dropdown menu contains: About Us, History, News & Press, and Make a Payment
 13. ✅ Updated all contact information across website (Contact page and Footer): Email (info@erwebservice.com), Phone (+49 15735707057), Address (Schenkendorfstr. 1, 51545 Waldbröl, Germany)
+14. ✅ Fixed "Read more" button on News & Press page - now clickable and expands to show full article content
 
 ## Important Notes
 

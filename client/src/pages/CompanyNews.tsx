@@ -62,6 +62,7 @@ export default function CompanyNews() {
                 key={article.id}
                 title={article.title}
                 excerpt={article.excerpt}
+                content={article.content}
                 date={formatDate(article.createdAt)}
                 author={article.author}
                 image={getImageForArticle(article.image)}
