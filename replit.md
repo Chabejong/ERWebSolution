@@ -9,7 +9,8 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 ## Technology Stack
 - **Frontend**: React, TypeScript, Tailwind CSS, shadcn/ui
 - **Backend**: Express.js, Node.js
-- **Database**: PostgreSQL with Drizzle ORM
+- **Database**: PostgreSQL with Drizzle ORM (persistent storage)
+- **Storage**: Object Storage for file uploads
 - **Routing**: Wouter
 - **State Management**: TanStack Query
 
@@ -60,6 +61,8 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 15. ✅ Fixed "Learn more" button on Services page - only appears when expandable content available, reveals full description when clicked
 16. ✅ Implemented admin authentication system with session-based login (username: erwebservice@gmail.com, password: news_2025)
 17. ✅ Implemented secure file upload functionality for news article images with object storage and ACL enforcement
+18. ✅ Fixed News & Press page to display uploaded images with /objects/ paths
+19. ✅ Migrated from MemStorage (in-memory) to DbStorage (PostgreSQL) for persistent data storage across restarts
 
 ## Important Notes
 
@@ -112,8 +115,13 @@ The application uses Replit's object storage for secure image uploads:
 - **Environment Variables**: `PUBLIC_OBJECT_SEARCH_PATHS`, `PRIVATE_OBJECT_DIR`
 - **Implementation Files**: `server/objectStorage.ts`, `server/objectAcl.ts`, `client/src/components/ObjectUploader.tsx`
 
-### Mock Data
-The application contains mock data throughout with `//todo` comments for easy identification.
+### Data Persistence
+The application now uses **PostgreSQL database** for all data storage:
+- News articles, portfolio projects, and contact submissions persist across server restarts
+- All CRUD operations use Drizzle ORM
+- Database schema automatically synced using `npm run db:push`
+
+Previously used in-memory storage (MemStorage) which lost data on restart. Now all data is permanently stored in the database.
 
 ## Project Structure
 ```
