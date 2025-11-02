@@ -51,26 +51,9 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
                   {slide.title}
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-8">
+                <p className="text-lg md:text-xl text-white/90">
                   {slide.description}
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  <Button 
-                    size="lg" 
-                    className="bg-primary text-primary-foreground border border-primary-border hover-elevate"
-                    data-testid="button-get-quote"
-                  >
-                    Get a Quote
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="backdrop-blur-sm bg-white/10 border-white/30 text-white hover:bg-white/20 hover-elevate"
-                    data-testid="button-view-services"
-                  >
-                    View Our Services
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
