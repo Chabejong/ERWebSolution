@@ -3,9 +3,9 @@ import { Footer } from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Handshake, Target, Zap } from 'lucide-react';
 import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_2_1759860120116.jpg';
-import gasaLogo from '@assets/stock_images/professional_media_c_fc25f84d.jpg';
-import mvoiceLogo from '@assets/stock_images/voice_communication__171084ca.jpg';
-import aandmLogo from '@assets/stock_images/business_company_log_6c1ddc5e.jpg';
+import gasaLogo from '@assets/Photo_from_Elvis_1765280999280.jpg';
+import aandmLogo from '@assets/logo_1765281036003.jpg';
+import ballotBoxLogo from '@assets/cn3m-logo_1_1765281066026.png';
 
 export default function Partner() {
   return (
@@ -47,9 +47,9 @@ export default function Partner() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
           {[
-            { name: 'GASA MEDIA', url: 'https://gasamedia.net', testId: 'partner-logo-gasamedia', image: gasaLogo },
-            { name: 'M-Voice', url: 'https://m-voice.replit.app', testId: 'partner-logo-mvoice', image: mvoiceLogo },
-            { name: 'A&M', url: 'https://aandm.replit.app', testId: 'partner-logo-aandm', image: aandmLogo },
+            { name: 'GASA Media', url: 'https://gasamedia.net', testId: 'partner-logo-gasamedia', image: gasaLogo },
+            { name: 'A&M Event Center', url: 'https://aandmeventcenter.com', testId: 'partner-logo-aandm', image: aandmLogo },
+            { name: 'The Ballot Box', url: 'https://theballotbox.com', testId: 'partner-logo-ballotbox', image: ballotBoxLogo },
           ].map((partner) => (
             <a
               key={partner.url}
