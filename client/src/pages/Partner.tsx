@@ -3,6 +3,9 @@ import { Footer } from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Handshake, Target, Zap } from 'lucide-react';
 import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a_beautiful_we_2_1759860120116.jpg';
+import gasaLogo from '@assets/stock_images/professional_media_c_fc25f84d.jpg';
+import mvoiceLogo from '@assets/stock_images/voice_communication__171084ca.jpg';
+import aandmLogo from '@assets/stock_images/business_company_log_6c1ddc5e.jpg';
 
 export default function Partner() {
   return (
@@ -44,19 +47,23 @@ export default function Partner() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
           {[
-            { name: 'GASA MEDIA', url: 'https://gasamedia.net', testId: 'partner-logo-gasamedia' },
-            { name: 'M-Voice', url: 'https://m-voice.replit.app', testId: 'partner-logo-mvoice' },
-            { name: 'A&M', url: 'https://aandm.replit.app', testId: 'partner-logo-aandm' },
+            { name: 'GASA MEDIA', url: 'https://gasamedia.net', testId: 'partner-logo-gasamedia', image: gasaLogo },
+            { name: 'M-Voice', url: 'https://m-voice.replit.app', testId: 'partner-logo-mvoice', image: mvoiceLogo },
+            { name: 'A&M', url: 'https://aandm.replit.app', testId: 'partner-logo-aandm', image: aandmLogo },
           ].map((partner) => (
             <a
               key={partner.url}
               href={partner.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="aspect-video bg-card border border-border rounded-lg flex items-center justify-center hover-elevate transition-all"
+              className="aspect-video bg-card border border-border rounded-lg flex items-center justify-center hover-elevate transition-all overflow-hidden"
               data-testid={partner.testId}
             >
-              <span className="text-muted-foreground font-medium text-center px-2">{partner.name}</span>
+              <img 
+                src={partner.image} 
+                alt={partner.name}
+                className="w-full h-full object-cover"
+              />
             </a>
           ))}
         </div>
