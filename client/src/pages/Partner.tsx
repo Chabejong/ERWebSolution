@@ -43,14 +43,21 @@ export default function Partner() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div
-              key={i}
+          {[
+            { name: 'GASA MEDIA', url: 'https://gasamedia.net', testId: 'partner-logo-gasamedia' },
+            { name: 'M-Voice', url: 'https://m-voice.replit.app', testId: 'partner-logo-mvoice' },
+            { name: 'A&M', url: 'https://aandm.replit.app', testId: 'partner-logo-aandm' },
+          ].map((partner) => (
+            <a
+              key={partner.url}
+              href={partner.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="aspect-video bg-card border border-border rounded-lg flex items-center justify-center hover-elevate transition-all"
-              data-testid={`partner-logo-${i}`}
+              data-testid={partner.testId}
             >
-              <span className="text-muted-foreground font-medium">Partner Logo {i}</span>
-            </div>
+              <span className="text-muted-foreground font-medium text-center px-2">{partner.name}</span>
+            </a>
           ))}
         </div>
 
