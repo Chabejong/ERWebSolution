@@ -4,6 +4,13 @@ import { AgentMailClient } from 'agentmail';
 let connectionSettings: any;
 
 async function getCredentials() {
+  // First, try to get API key from environment variable (for production)
+  if (process.env.AGENTMAIL_API_KEY) {
+    console.log('Using AgentMail API key from environment variable');
+    return { apiKey: process.env.AGENTMAIL_API_KEY };
+  }
+
+  // Fallback to connector approach (for development)
   const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
   const xReplitToken = process.env.REPL_IDENTITY 
     ? 'repl ' + process.env.REPL_IDENTITY 
@@ -11,8 +18,8 @@ async function getCredentials() {
     ? 'depl ' + process.env.WEB_REPL_RENEWAL 
     : null;
 
-  if (!xReplitToken) {
-    throw new Error('X_REPLIT_TOKEN not found for repl/depl');
+  if (!xReplitToken || !hostname) {
+    throw new Error('AgentMail API key not found in environment variables and connector authentication failed');
   }
 
   connectionSettings = await fetch(
