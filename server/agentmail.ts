@@ -1,13 +1,10 @@
 // AgentMail integration for sending contact form emails
-import { AgentMailClient } from 'agentmail';
 
-let connectionSettings: any;
-
-async function getCredentials() {
+async function getApiKey() {
   // First, try to get API key from environment variable (for production)
   if (process.env.AGENTMAIL_API_KEY) {
     console.log('Using AgentMail API key from environment variable');
-    return { apiKey: process.env.AGENTMAIL_API_KEY };
+    return process.env.AGENTMAIL_API_KEY;
   }
 
   // Fallback to connector approach (for development)
@@ -22,7 +19,7 @@ async function getCredentials() {
     throw new Error('AgentMail API key not found in environment variables and connector authentication failed');
   }
 
-  connectionSettings = await fetch(
+  const connectionSettings = await fetch(
     'https://' + hostname + '/api/v2/connection?include_secrets=true&connector_names=agentmail',
     {
       headers: {
@@ -35,16 +32,7 @@ async function getCredentials() {
   if (!connectionSettings || !connectionSettings.settings.api_key) {
     throw new Error('AgentMail not connected');
   }
-  return { apiKey: connectionSettings.settings.api_key };
-}
-
-// WARNING: Never cache this client.
-// Access tokens expire, so a new client must be created each time.
-export async function getUncachableAgentMailClient() {
-  const { apiKey } = await getCredentials();
-  return new AgentMailClient({
-    apiKey: apiKey
-  });
+  return connectionSettings.settings.api_key;
 }
 
 export interface ContactFormData {
@@ -57,17 +45,19 @@ export interface ContactFormData {
 
 export async function sendContactFormEmail(data: ContactFormData): Promise<boolean> {
   try {
-    const client = await getUncachableAgentMailClient();
+    const apiKey = await getApiKey();
     
-    // Create an inbox to send from
-    const inbox = await client.inboxes.create({});
-    const inboxId = inbox.inboxId;
-    
-    // Send the email to the business owner via inboxes.messages.send
-    await client.inboxes.messages.send(inboxId, {
-      to: 'erwebservice@gmail.com',
-      subject: `New Contact Form Submission from ${data.name}`,
-      text: `
+    // Use AgentMail's direct HTTP API to send emails (avoids inbox limit issues)
+    const response = await fetch('https://api.agentmail.dev/v1/messages/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        to: 'erwebservice@gmail.com',
+        subject: `New Contact Form Submission from ${data.name}`,
+        text: `
 New contact form submission received:
 
 Name: ${data.name}
@@ -80,8 +70,8 @@ ${data.message}
 
 ---
 This message was sent from the E&R Webservice contact form.
-      `.trim(),
-      html: `
+        `.trim(),
+        html: `
 <h2>New Contact Form Submission</h2>
 <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
   <tr>
@@ -105,16 +95,19 @@ This message was sent from the E&R Webservice contact form.
 <p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${data.message.replace(/\n/g, '<br>')}</p>
 <hr>
 <p style="color: #666; font-size: 12px;">This message was sent from the E&R Webservice contact form.</p>
-      `.trim()
+        `.trim()
+      })
     });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`AgentMail API error: ${response.status} - ${error}`);
+    }
     
     console.log('Contact form email sent successfully');
     return true;
   } catch (error) {
     console.error('Failed to send contact form email:', error instanceof Error ? error.message : JSON.stringify(error));
-    if (error instanceof Error && error.stack) {
-      console.error('Stack trace:', error.stack);
-    }
     return false;
   }
 }
