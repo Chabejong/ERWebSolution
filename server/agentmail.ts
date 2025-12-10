@@ -58,7 +58,7 @@ export async function sendContactFormEmail(data: ContactFormData): Promise<boole
     
     // Send the email to the business owner via inboxes.messages.send
     await client.inboxes.messages.send(inboxId, {
-      to: ['erwebservice@gmail.com'],
+      to: 'erwebservice@gmail.com',
       subject: `New Contact Form Submission from ${data.name}`,
       text: `
 New contact form submission received:
@@ -104,7 +104,10 @@ This message was sent from the E&R Webservice contact form.
     console.log('Contact form email sent successfully');
     return true;
   } catch (error) {
-    console.error('Failed to send contact form email:', error);
+    console.error('Failed to send contact form email:', error instanceof Error ? error.message : JSON.stringify(error));
+    if (error instanceof Error && error.stack) {
+      console.error('Stack trace:', error.stack);
+    }
     return false;
   }
 }
