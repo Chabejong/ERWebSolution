@@ -1,6 +1,8 @@
 // AgentMail integration for sending contact form emails
+// Reference: connection:conn_agentmail_01KC4K1P0W6A5P59R5G41MBNFX
+import { AgentMailClient } from 'agentmail';
 
-async function getApiKey() {
+async function getApiKey(): Promise<string> {
   // First, try to get API key from environment variable (for production)
   if (process.env.AGENTMAIL_API_KEY) {
     console.log('Using AgentMail API key from environment variable');
@@ -35,6 +37,47 @@ async function getApiKey() {
   return connectionSettings.settings.api_key;
 }
 
+// Get AgentMail client with proper configuration
+async function getAgentMailClient(): Promise<AgentMailClient> {
+  const apiKey = await getApiKey();
+  return new AgentMailClient({
+    apiKey: apiKey
+  });
+}
+
+// Cache inbox ID to avoid hitting inbox creation limits
+let cachedInboxId: string | null = null;
+
+async function getOrCreateInbox(client: AgentMailClient): Promise<string> {
+  if (cachedInboxId) {
+    return cachedInboxId;
+  }
+  
+  // Try to get existing inbox first
+  try {
+    const response = await client.inboxes.list();
+    // Access inboxes array from response
+    const inboxes = (response as any).inboxes || (response as any).data || (response as any).items;
+    
+    if (inboxes && Array.isArray(inboxes) && inboxes.length > 0) {
+      const inboxId = inboxes[0].inboxId as string;
+      cachedInboxId = inboxId;
+      console.log('Using AgentMail inbox:', inboxId);
+      return inboxId;
+    }
+  } catch (listError) {
+    console.log('Could not list inboxes:', listError instanceof Error ? listError.message : listError);
+  }
+  
+  // Only try to create if no existing inbox found
+  const inbox = await client.inboxes.create({
+    displayName: 'E&R Webservice Contact Form'
+  });
+  cachedInboxId = inbox.inboxId;
+  console.log('Created new AgentMail inbox:', cachedInboxId);
+  return cachedInboxId;
+}
+
 export interface ContactFormData {
   name: string;
   email: string;
@@ -45,19 +88,14 @@ export interface ContactFormData {
 
 export async function sendContactFormEmail(data: ContactFormData): Promise<boolean> {
   try {
-    const apiKey = await getApiKey();
+    const client = await getAgentMailClient();
+    const inboxId = await getOrCreateInbox(client);
     
-    // Use AgentMail's direct HTTP API to send emails (avoids inbox limit issues)
-    const response = await fetch('https://api.agentmail.dev/v1/messages/send', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        to: 'erwebservice@gmail.com',
-        subject: `New Contact Form Submission from ${data.name}`,
-        text: `
+    // Send the email to the business owner
+    await client.inboxes.messages.send(inboxId, {
+      to: 'erwebservice@gmail.com',
+      subject: `New Contact Form Submission from ${data.name}`,
+      text: `
 New contact form submission received:
 
 Name: ${data.name}
@@ -70,8 +108,8 @@ ${data.message}
 
 ---
 This message was sent from the E&R Webservice contact form.
-        `.trim(),
-        html: `
+      `.trim(),
+      html: `
 <h2>New Contact Form Submission</h2>
 <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
   <tr>
@@ -95,19 +133,16 @@ This message was sent from the E&R Webservice contact form.
 <p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${data.message.replace(/\n/g, '<br>')}</p>
 <hr>
 <p style="color: #666; font-size: 12px;">This message was sent from the E&R Webservice contact form.</p>
-        `.trim()
-      })
+      `.trim()
     });
-
-    if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`AgentMail API error: ${response.status} - ${error}`);
-    }
     
     console.log('Contact form email sent successfully');
     return true;
   } catch (error) {
     console.error('Failed to send contact form email:', error instanceof Error ? error.message : JSON.stringify(error));
+    if (error instanceof Error && error.stack) {
+      console.error('Stack trace:', error.stack);
+    }
     return false;
   }
 }

@@ -91,6 +91,8 @@ The contact form is integrated with AgentMail for automatic email delivery:
 - **Content**: Formatted HTML email with all form fields (name, email, phone, company, message)
 - **Implementation Files**: `server/agentmail.ts`, `server/routes.ts`
 - **Error Handling**: Email failures are logged but don't block form submission - contact data is always saved to database
+- **Inbox Reuse**: The integration lists and reuses existing AgentMail inboxes to avoid hitting inbox creation limits
+- **API Key**: Set via `AGENTMAIL_API_KEY` environment variable for production
 
 ### Tech-Themed Imagery
 All images featuring people have been replaced with technology-focused stock photos:
