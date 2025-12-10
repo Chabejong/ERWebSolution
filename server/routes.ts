@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { storage } from "./storage";
 import { insertNewsArticleSchema, insertPortfolioProjectSchema, insertContactSubmissionSchema } from "@shared/schema";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
+import { sendContactFormEmail } from "./agentmail";
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "erwebservice@gmail.com";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "news_2025";
@@ -234,6 +235,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertContactSubmissionSchema.parse(req.body);
       const submission = await storage.createContactSubmission(validatedData);
+      
+      // Send email notification via AgentMail
+      try {
+        await sendContactFormEmail({
+          name: validatedData.name,
+          email: validatedData.email,
+          phone: validatedData.phone || undefined,
+          company: validatedData.company || undefined,
+          message: validatedData.message,
+        });
+      } catch (emailError) {
+        console.error('Failed to send contact form email:', emailError);
+        // Don't fail the request if email sending fails - submission is still saved
+      }
+      
       res.status(201).json(submission);
     } catch (error) {
       res.status(400).json({ error: "Invalid contact data" });
