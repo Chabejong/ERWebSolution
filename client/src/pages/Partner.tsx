@@ -6,7 +6,7 @@ import heroImage from '@assets/Lucid_Origin_A_futuristic_laptop_on_a_desk_with_a
 import gasaLogo from '@assets/Photo_from_Elvis_1765280999280.jpg';
 import aandmLogo from '@assets/logo_1765281036003.jpg';
 import ballotBoxLogo from '@assets/cn3m-logo_1_1765281066026.png';
-import replitLogo from '@assets/stock_images/replit_logo_red_circ_b0eaf65d.jpg';
+import replitLogo from '@assets/stock_images/replit_logo_clean_re_48454ca8.jpg';
 
 export default function Partner() {
   return (
