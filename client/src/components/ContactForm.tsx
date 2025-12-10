@@ -26,6 +26,7 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
+      phone: undefined,
       company: '',
       message: '',
     },
@@ -86,6 +87,26 @@ export function ContactForm() {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} data-testid="input-email" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Telephone</FormLabel>
+              <FormControl>
+                <Input 
+                  type="tel" 
+                  placeholder="+49 123 456789" 
+                  {...field}
+                  value={field.value || ''}
+                  data-testid="input-phone" 
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
