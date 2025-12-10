@@ -20,11 +20,12 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 - ✅ Admin dashboard for CMS management
 - ✅ News & Press article management with secure image upload
 - ✅ Portfolio/reference project showcase
-- ✅ Contact form with database storage
+- ✅ Contact form with database storage and email notifications
 - ✅ Fully responsive design
 - ✅ SEO optimization
 - ✅ Left-aligned navigation with CN3M logo
 - ✅ Object storage integration with ACL security
+- ✅ AgentMail integration for contact form email delivery
 
 ## Services Offered
 1. **Web App Design** - Custom web applications with modern UI/UX
@@ -63,6 +64,7 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 17. ✅ Implemented secure file upload functionality for news article images with object storage and ACL enforcement
 18. ✅ Fixed News & Press page to display uploaded images with /objects/ paths
 19. ✅ Migrated from MemStorage (in-memory) to DbStorage (PostgreSQL) for persistent data storage across restarts
+20. ✅ Integrated AgentMail for contact form email notifications - sends email to erwebservice@gmail.com when users submit contact forms
 
 ## Important Notes
 
@@ -81,6 +83,14 @@ Multi-page corporate website with CMS functionality for managing content, portfo
 - **PayPal Payment Link**: Updated "Make a Payment" menu item with actual PayPal.me link (https://www.paypal.com/paypalme/nkwettae)
   - Location: `client/src/components/Navigation.tsx`
   - Works in both desktop and mobile navigation menus
+
+### Contact Form Email Notifications
+The contact form is integrated with AgentMail for automatic email delivery:
+- **Recipient**: erwebservice@gmail.com
+- **Trigger**: When a user submits the contact form
+- **Content**: Formatted HTML email with all form fields (name, email, phone, company, message)
+- **Implementation Files**: `server/agentmail.ts`, `server/routes.ts`
+- **Error Handling**: Email failures are logged but don't block form submission - contact data is always saved to database
 
 ### Tech-Themed Imagery
 All images featuring people have been replaced with technology-focused stock photos:
